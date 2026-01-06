@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Validation</title>
+</head>
+<body>
+
+<h2>Registration Form</h2>
+
+<form onsubmit="return validate()">
+
+    Name:
+    <input type="text" id="name"><br><br>
+
+    Email:
+    <input type="text" id="email"><br><br>
+
+    Password:
+    <input type="password" id="password"><br><br>
+
+    Phone Number:
+    <input type="text" id="phone"><br><br>
+
+    Date of Birth:
+    <input type="date" id="dob"><br><br>
+
+    <input type="submit" value="Submit">
+
+</form>
+
+<p id="msg" style="color:red;"></p>
+
+<script>
+function validate() {
+
+    var name = document.getElementById("name").value;
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+    var phone = document.getElementById("phone").value;
+    var msg = document.getElementById("msg");
+
+    if (name.length < 3) {
+        msg.innerText = "Name must have at least 3 letters";
+        return false;
+    }
+
+    for (var i = 0; i < name.length; i++) {
+        if (!(name[i] >= 'A' && name[i] <= 'Z' ||
+              name[i] >= 'a' && name[i] <= 'z')) {
+            msg.innerText = "Name should contain only alphabets";
+            return false;
+        }
+    }
+
+    if (email.indexOf("@") == -1 || email.indexOf(".") == -1) {
+        msg.innerText = "Invalid email";
+        return false;
+    }
+
+    if (password.length < 8) {
+        msg.innerText = "Password must be at least 8 characters";
+        return false;
+    }
+
+    if (phone.length != 10) {
+        msg.innerText = "Phone number must be 10 digits";
+        return false;
+    }
+
+    for (var i = 0; i < phone.length; i++) {
+        if (phone[i] < '0' || phone[i] > '9') {
+            msg.innerText = "Phone number should contain only numbers";
+            return false;
+        }
+    }
+
+    alert("Form submitted successfully");
+    return true;
+}
+</script>
+
+</body>
+</html>
